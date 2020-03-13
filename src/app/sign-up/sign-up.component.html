@@ -9,6 +9,7 @@
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text"
+                   [formControl]="username"
                    class="form-control"
                    id="username"
                    placeholder="Username">
@@ -16,8 +17,14 @@
         </div>
 
         <p>
+            Value: {{username.value}}
+        </p>
+
+        <p>
             <button class="btn btn-success"
                     type="submit"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-warning"
+                    (click)="clear()"><i class="fas fa-snowplow"></i> Clear</button>
         </p>
 
     </div>
