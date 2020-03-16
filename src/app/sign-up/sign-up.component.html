@@ -6,26 +6,43 @@
             </h4>
 
         </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text"
-                   [formControl]="username"
-                   class="form-control"
-                   id="username"
-                   placeholder="Username">
+        <form [formGroup]="userForm"
+              (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text"
+                       formControlName="username"
+                       class="form-control"
+                       id="username"
+                       placeholder="Username">
 
-        </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text"
+                       formControlName="password"
+                       class="form-control"
+                       id="password"
+                       placeholder="Password">
 
-        <p>
-            Value: {{username.value}}
-        </p>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password"
+                       formControlName="confirmPassword"
+                       class="form-control"
+                       id="confirmPassword"
+                       placeholder="Confirm Password"
+                       autocomplete>
 
-        <p>
-            <button class="btn btn-success"
-                    type="submit"><i class="fas fa-save"></i> Save</button>
-            <button class="btn btn-warning"
-                    (click)="clear()"><i class="fas fa-snowplow"></i> Clear</button>
-        </p>
+            </div>
+            <p>
+                <button class="btn btn-success"
+                        type="submit"><i class="fas fa-save"></i> Save</button>
+                <button class="btn btn-warning"
+                        (click)="clear()"><i class="fas fa-snowplow"></i> Clear</button>
+            </p>
+        </form>
 
     </div>
 
