@@ -31,9 +31,14 @@
                 <input type="password"
                        formControlName="confirmPassword"
                        class="form-control"
+                       [ngClass]="{'is-invalid':userForm.get('confirmPassword').errors && userForm.get('confirmPassword').touched}"
                        id="confirmPassword"
                        placeholder="Confirm Password"
                        autocomplete>
+                <div class="invalid-feedback"
+                     *ngIf="userForm.get('confirmPassword').hasError('passwordMismatch')">
+                    Passwords Don't Match
+                </div>
 
             </div>
             <section formGroupName="address">

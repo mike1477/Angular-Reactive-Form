@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { CustomValidationService } from "../services/custom-validation.service";
 
 @Component({
   selector: "app-sign-up",
@@ -7,17 +8,25 @@ import { FormBuilder, Validators } from "@angular/forms";
   styleUrls: ["./sign-up.component.scss"]
 })
 export class SignUpComponent implements OnInit {
-  userForm = this.fb.group({
-    username: ["", [Validators.required, Validators.minLength(3)]],
-    password: ["", Validators.required],
-    confirmPassword: ["", Validators.required],
-    address: this.fb.group({
-      street: [""],
-      city: [""],
-      state: [""],
-      zip: [""]
-    })
-  });
+  userForm = this.fb.group(
+    {
+      username: ["", [Validators.required, Validators.minLength(3)]],
+      password: ["", Validators.required],
+      confirmPassword: ["", Validators.required],
+      address: this.fb.group({
+        street: [""],
+        city: [""],
+        state: [""],
+        zip: [""]
+      })
+    },
+    {
+      validator: this.customValidator.passwordMatchValidator(
+        "password",
+        "confirmPassword"
+      )
+    }
+  );
   stateOptions: string[] = ["PA", "OH", "MI"];
 
   userAddressInfo: any = {
@@ -27,7 +36,10 @@ export class SignUpComponent implements OnInit {
     zip: "12345"
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private customValidator: CustomValidationService
+  ) {}
 
   ngOnInit() {}
 
