@@ -13,8 +13,13 @@
                 <input type="text"
                        formControlName="username"
                        class="form-control"
+                       [ngClass]="{'is-invalid':userForm.get('username').errors && userForm.get('username').touched}"
                        id="username"
                        placeholder="Username">
+                <div class="invalid-feedback"
+                     *ngIf="userForm.get('username').hasError('usernameTaken')">
+                    Username is taken
+                </div>
 
             </div>
             <div class="form-group">
