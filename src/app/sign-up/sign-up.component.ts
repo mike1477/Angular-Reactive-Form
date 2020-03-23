@@ -31,6 +31,19 @@ export class SignUpComponent implements OnInit {
       )
     }
   );
+
+  get username() {
+    return this.userForm.get("username");
+  }
+
+  get confirmPassword() {
+    return this.userForm.get("confirmPassword");
+  }
+
+  get password() {
+    return this.userForm.get("password");
+  }
+
   stateOptions: string[] = ["PA", "OH", "MI"];
 
   userAddressInfo: any = {
