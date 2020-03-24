@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { CustomValidationService } from "../services/custom-validation.service";
 
 @Component({
@@ -8,6 +8,11 @@ import { CustomValidationService } from "../services/custom-validation.service";
   styleUrls: ["./sign-up.component.scss"]
 })
 export class SignUpComponent implements OnInit {
+  constructor(
+    private fb: FormBuilder,
+    private customValidator: CustomValidationService
+  ) {}
+
   userForm = this.fb.group(
     {
       username: [
@@ -22,7 +27,8 @@ export class SignUpComponent implements OnInit {
         city: [""],
         state: [""],
         zip: [""]
-      })
+      }),
+      daysAvailable: this.fb.array([this.fb.control("")])
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -31,6 +37,14 @@ export class SignUpComponent implements OnInit {
       )
     }
   );
+
+  addDay() {
+    this.daysAvailable.push(this.fb.control(""));
+  }
+
+  get daysAvailable() {
+    return this.userForm.get("daysAvailable") as FormArray;
+  }
 
   get username() {
     return this.userForm.get("username");
@@ -52,11 +66,6 @@ export class SignUpComponent implements OnInit {
     state: this.stateOptions[0],
     zip: "12345"
   };
-
-  constructor(
-    private fb: FormBuilder,
-    private customValidator: CustomValidationService
-  ) {}
 
   ngOnInit() {}
 

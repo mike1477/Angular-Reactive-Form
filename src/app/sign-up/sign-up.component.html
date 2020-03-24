@@ -104,6 +104,31 @@
                 </div>
             </section>
 
+            <section formArrayName="daysAvailable">
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4>Days Available</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary"
+                                (click)="addDay()">Add Day</button>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group"
+                     *ngFor="let day of daysAvailable.controls; let i=index">
+                    <label>Day</label>
+                    <input type="text"
+                           [formControlName]="i"
+                           class="form-control">
+
+                </div>
+
+            </section>
+
             <p>
                 <button class="btn btn-success"
                         type="submit"
